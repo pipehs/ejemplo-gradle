@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Herramienta de ejecución seleccionada: ' ${params.CHOICE}
-                    def ejecucion = (params.CHOICE == 'gradle') ? load "gradle.groovy" : load "maven.groovy"
+                    def ejecucion = (params.CHOICE == 'gradle') ? load 'gradle.groovy' : load 'maven.groovy'
                     ejecucion.call()
                 }
             }
