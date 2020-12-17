@@ -5,7 +5,6 @@ pipeline {
         stage('Pipeline') {
             steps {
                 script {
-                    echo 'Herramienta de ejecución seleccionada: ' ${params.CHOICE}
                     if (params.CHOICE == 'gradle')
                     {
                         def ejecucion = load 'gradle.groovy'
