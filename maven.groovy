@@ -7,30 +7,22 @@
 def call(){
 
         stage('Compile') {
-                steps {
                     sh './mvnw clean compile -e'
-                }
             }
             
             stage('Test Code') {
-                steps {
                     sh './mvnw clean test -e'
-                }
             }
             stage('Jar') {
-                steps {
                     sh './mvnw clean package -e'
-                }
             }
             stage('SonarQube analysis') {
-                steps {
-                    withSonarQubeEnv('Sonar') {
-                        sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-                    }
-                }
+                        def scannerHome = tool 'sonar';
+                        withSonarQubeEnv('Sonar') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
+                        }
             }
             stage('uploadNexus') {
-                steps {
                         nexusPublisher nexusInstanceId: 'nexus',
                         nexusRepositoryId: 'test-nexus',
                         packages: [[$class: 'MavenPackage',
@@ -45,7 +37,6 @@ def call(){
                                 ]
                             ]
                         ]
-                }
             }
 }
 
