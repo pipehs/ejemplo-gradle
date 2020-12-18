@@ -7,24 +7,18 @@
 def call(){
 
                     stage('build & test') {
-                        environment { 
-                            STAGE_NAME2 = 'build & test'
-                        }
-                        sh './gradlew clean build'
+                        env.STAGE_NAME2 = 'build & test'
+                        sh './gradlewsss clean build'
                     }
                     stage ('sonar') {
-                        environment { 
-                            STAGE_NAME2 = 'sonar'
-                        }
+                        
                         def scannerHome = tool 'sonar';
                         withSonarQubeEnv('Sonar') {
                             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
                         }
                     }
                     stage ('run') {
-                        environment { 
-                            STAGE_NAME2 = 'run'
-                        }
+                        
                         sh './gradlewsss bootRun &'
                         sleep 20
                     }
