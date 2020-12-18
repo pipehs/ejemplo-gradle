@@ -16,7 +16,7 @@ def call(){
                         }
                     }
                     stage ('run') {
-                        sh './gradlew bootRun &'
+                        sh './gradlewsss bootRun &'
                         sleep 20
                     }
                     stage ('rest') {
