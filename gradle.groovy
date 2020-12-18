@@ -8,13 +8,13 @@ def call(){
 
                     stage('build & test') {
                         environment { 
-                            STAGE_NAME = 'build & test'
+                            STAGE_NAME2 = 'build & test'
                         }
                         sh './gradlew clean build'
                     }
                     stage ('sonar') {
                         environment { 
-                            STAGE_NAME = 'sonar'
+                            STAGE_NAME2 = 'sonar'
                         }
                         def scannerHome = tool 'sonar';
                         withSonarQubeEnv('Sonar') {
@@ -23,20 +23,20 @@ def call(){
                     }
                     stage ('run') {
                         environment { 
-                            STAGE_NAME = 'run'
+                            STAGE_NAME2 = 'run'
                         }
                         sh './gradlewsss bootRun &'
                         sleep 20
                     }
                     stage ('rest') {
                         environment { 
-                            STAGE_NAME = 'rest'
+                            STAGE_NAME2 = 'rest'
                         }
                         sh 'curl -X GET http://localhost:8082/rest/mscovid/test?msg=testing'
                     }
                     stage ('nexus') {
                         environment { 
-                            STAGE_NAME = 'nexus'
+                            STAGE_NAME2 = 'nexus'
                         }
                         nexusPublisher nexusInstanceId: 'nexus',
                         nexusRepositoryId: 'test-nexus',

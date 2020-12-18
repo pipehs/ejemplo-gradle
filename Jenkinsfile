@@ -33,7 +33,7 @@ pipeline {
         failure {
             slackSend channel: 'U01E2R4SXRN', 
             color: 'danger', 
-            message: "[${USER_NAME}] [${JOB_NAME}] [${params.CHOICE}]  Ejecución fallida en [${STAGE_NAME}]", 
+            message: "[${USER_NAME}] [${JOB_NAME}] [${params.CHOICE}]  Ejecución fallida en [${STAGE_NAME2}]", 
             teamDomain: 'dipdevopsusach2020', 
             tokenCredentialId: 'slack-token'
         }
