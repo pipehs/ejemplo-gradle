@@ -7,24 +7,37 @@
 def call(){
 
                     stage('build & test') {
+                        environment { 
+                            STAGE_NAME = 'build & test'
+                        }
                         sh './gradlew clean build'
                     }
                     stage ('sonar') {
-                        env.STAGE_NAME = 'sonar'
+                        environment { 
+                            STAGE_NAME = 'sonar'
+                        }
                         def scannerHome = tool 'sonar';
                         withSonarQubeEnv('Sonar') {
                             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
                         }
                     }
                     stage ('run') {
-                        env.STAGE_NAME = 'run'
+                        environment { 
+                            STAGE_NAME = 'run'
+                        }
                         sh './gradlewsss bootRun &'
                         sleep 20
                     }
                     stage ('rest') {
+                        environment { 
+                            STAGE_NAME = 'rest'
+                        }
                         sh 'curl -X GET http://localhost:8082/rest/mscovid/test?msg=testing'
                     }
                     stage ('nexus') {
+                        environment { 
+                            STAGE_NAME = 'nexus'
+                        }
                         nexusPublisher nexusInstanceId: 'nexus',
                         nexusRepositoryId: 'test-nexus',
                         packages: [[$class: 'MavenPackage',
