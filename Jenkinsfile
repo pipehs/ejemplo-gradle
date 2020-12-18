@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    env.USER_NAME = 'Felipe Herrera Seguel'
+    environment { 
+        USER_NAME = 'Felipe Herrera Seguel'
+    }
     parameters {choice(name:'CHOICE', choices:['gradle','maven'], description: 'Elección de herramienta de construcción')}
     stages {
         stage('Pipeline') {
