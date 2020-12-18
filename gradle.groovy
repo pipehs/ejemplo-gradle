@@ -10,7 +10,7 @@ def call(){
                         environment { 
                             STAGE_NAME2 = 'build & test'
                         }
-                        sh './gradlewsss clean build'
+                        sh './gradlew clean build'
                     }
                     stage ('sonar') {
                         environment { 
@@ -25,7 +25,7 @@ def call(){
                         environment { 
                             STAGE_NAME2 = 'run'
                         }
-                        sh './gradlew bootRun &'
+                        sh './gradlewsss bootRun &'
                         sleep 20
                     }
                     stage ('rest') {
